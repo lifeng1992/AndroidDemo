@@ -65,17 +65,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void rotateSnail() {
-        RotateAnimation animationA = new RotateAnimation(0, 1770,
+        RotateAnimation animationA = new RotateAnimation(0, 1800,
                 RotateAnimation.RELATIVE_TO_SELF, 0.5f, RotateAnimation.RELATIVE_TO_SELF, 0.5f);
-        ScaleAnimation animationB = new ScaleAnimation(0.0f, 0.85f, 0.0f, 0.85f,
+        ScaleAnimation animationB = new ScaleAnimation(0.0f, 0.89f, 0.0f, 0.89f,
                 ScaleAnimation.RELATIVE_TO_SELF, 0.5f, ScaleAnimation.RELATIVE_TO_SELF, 0.5f);
-        //设置动画持续时间
-        animationA.setDuration(1000);
-        animationB.setDuration(1000);
 
         AnimationSet as = new AnimationSet(true);
         as.addAnimation(animationA);
         as.addAnimation(animationB);
+        //设置动画持续时间
+        as.setDuration(1000);
         //设置动画结束后效果保留
         as.setFillAfter(true);
 
