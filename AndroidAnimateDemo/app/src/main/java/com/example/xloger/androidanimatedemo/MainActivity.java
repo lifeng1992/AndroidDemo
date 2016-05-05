@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
         ObjectAnimator reduce = ObjectAnimator.ofInt(wrapper, "width", width, (int)(length*1.2));
         ObjectAnimator increase = ObjectAnimator.ofInt(wrapper, "height", height, (int)(length*1.2));
-        ObjectAnimator move = ObjectAnimator.ofFloat(wrapper, "translationY", 0f, snail_y-vi_y);
+        ObjectAnimator move = ObjectAnimator.ofFloat(wrapper, "translationY", 0f, (float)(snail_y-vi_y-length*0.1));
         AnimatorSet animSet = new AnimatorSet();
         animSet.play(increase).with(reduce).with(move);
         animSet.setDuration(1000);
