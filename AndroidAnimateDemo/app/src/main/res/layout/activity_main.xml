@@ -17,7 +17,7 @@
         android:layout_width="125dp"
         android:layout_height="125dp"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="100dp"
         android:visibility="invisible"
         android:background="@drawable/path_copy_small"/>
 </RelativeLayout>
