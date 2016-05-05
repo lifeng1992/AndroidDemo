@@ -7,6 +7,7 @@ import android.animation.ObjectAnimator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
@@ -31,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
                 v.setOnClickListener(null);
             }
         });
+
+        Log.e("Eve", "Hello World");
     }
 
     private void initView() {
@@ -45,13 +48,18 @@ public class MainActivity extends AppCompatActivity {
 
         // 属性动画,可行,但是要对View进行一次包装
         final ImageView snail = (ImageView)findViewById(R.id.ic_snail);
+        // 获取 snail ico的位置
+        int snail_x = snail.getTop();
+        int snail_y = snail.getLeft();
+        int vi_y = vi.getTop();
+
         int length = snail.getHeight();
         int height = vi.getLayoutParams().height;
         int width = vi.getLayoutParams().width;
         ViewWrapper wrapper = new ViewWrapper(vi);
         ObjectAnimator reduce = ObjectAnimator.ofInt(wrapper, "width", width, length);
         ObjectAnimator increase = ObjectAnimator.ofInt(wrapper, "height", height, length);
-        ObjectAnimator move = ObjectAnimator.ofFloat(wrapper, "translationY", 0f, -400f);
+        ObjectAnimator move = ObjectAnimator.ofFloat(wrapper, "translationY", 0f, snail_y-vi_y+2*height);
         AnimatorSet animSet = new AnimatorSet();
         animSet.play(increase).with(reduce).with(move);
         animSet.setDuration(1000);
@@ -63,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
                 rotateSnail();
             }
         });
+        Log.d("Eve", "Animation Start");
         animSet.start();
 
         // 按比例缩放,不行
@@ -72,13 +81,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void rotateSnail() {
         RotateAnimation animation = new
-                RotateAnimation(0, 720, RotateAnimation.RELATIVE_TO_SELF, 0.5f, RotateAnimation.RELATIVE_TO_SELF, 0.5f);
+                RotateAnimation(0, 1770, RotateAnimation.RELATIVE_TO_SELF, 0.5f, RotateAnimation.RELATIVE_TO_SELF, 0.5f);
         //设置动画持续时间
         animation.setDuration(2000);
         //设置动画结束后效果保留
         animation.setFillAfter(true);
         //找到对象，开启动画
         ImageView snail = (ImageView) findViewById(R.id.ic_snail);
+        snail.setVisibility(View.VISIBLE);
         snail.startAnimation(animation);
     }
 
