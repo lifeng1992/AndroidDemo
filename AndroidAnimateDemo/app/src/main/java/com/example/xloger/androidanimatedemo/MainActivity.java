@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.RotateAnimation;
 import android.view.animation.ScaleAnimation;
@@ -82,6 +83,22 @@ public class MainActivity extends AppCompatActivity {
         ImageView snail = (ImageView) findViewById(R.id.ic_snail);
         snail.setVisibility(View.VISIBLE);
         snail.setAnimation(as);
+        as.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                Toast.makeText(getApplicationContext(), "Game Over", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
         as.startNow();
     }
 
