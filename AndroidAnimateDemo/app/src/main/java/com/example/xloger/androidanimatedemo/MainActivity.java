@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AnimationSet;
 import android.view.animation.RotateAnimation;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
@@ -45,8 +46,8 @@ public class MainActivity extends AppCompatActivity {
         int width = vi.getLayoutParams().width;
         ViewWrapper wrapper = new ViewWrapper(vi);
 
-        ObjectAnimator reduce = ObjectAnimator.ofInt(wrapper, "width", width, length);
-        ObjectAnimator increase = ObjectAnimator.ofInt(wrapper, "height", height, length);
+        ObjectAnimator reduce = ObjectAnimator.ofInt(wrapper, "width", width, (int)(length*1.2));
+        ObjectAnimator increase = ObjectAnimator.ofInt(wrapper, "height", height, (int)(length*1.2));
         ObjectAnimator move = ObjectAnimator.ofFloat(wrapper, "translationY", 0f, snail_y-vi_y);
         AnimatorSet animSet = new AnimatorSet();
         animSet.play(increase).with(reduce).with(move);
@@ -66,16 +67,24 @@ public class MainActivity extends AppCompatActivity {
     private void rotateSnail() {
         RotateAnimation animationA = new RotateAnimation(0, 1770,
                 RotateAnimation.RELATIVE_TO_SELF, 0.5f, RotateAnimation.RELATIVE_TO_SELF, 0.5f);
-//        ScaleAnimation animationB = new ScaleAnimation(0.0f, 1.4f, 0.0f, 1.4f,
-//                ScaleAnimation.RELATIVE_TO_SELF, 0.5f, ScaleAnimation.RELATIVE_TO_SELF, 0.5f);
+        ScaleAnimation animationB = new ScaleAnimation(0.0f, 1.0f, 0.0f, 1.0f,
+                ScaleAnimation.RELATIVE_TO_SELF, 0.5f, ScaleAnimation.RELATIVE_TO_SELF, 0.5f);
         //设置动画持续时间
         animationA.setDuration(2000);
+        animationB.setDuration(2000);
         //设置动画结束后效果保留
         animationA.setFillAfter(true);
+        animationB.setFillAfter(true);
+
+        AnimationSet as = new AnimationSet(true);
+        as.addAnimation(animationA);
+        as.addAnimation(animationB);
+
         //找到对象，开启动画
         ImageView snail = (ImageView) findViewById(R.id.ic_snail);
         snail.setVisibility(View.VISIBLE);
-        snail.startAnimation(animationA);
+        snail.setAnimation(as);
+        as.startNow();
     }
 
     private static class ViewWrapper {
