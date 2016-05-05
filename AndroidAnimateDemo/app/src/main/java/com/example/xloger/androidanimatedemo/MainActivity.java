@@ -70,8 +70,8 @@ public class MainActivity extends AppCompatActivity {
         ScaleAnimation animationB = new ScaleAnimation(0.0f, 1.0f, 0.0f, 1.0f,
                 ScaleAnimation.RELATIVE_TO_SELF, 0.5f, ScaleAnimation.RELATIVE_TO_SELF, 0.5f);
         //设置动画持续时间
-        animationA.setDuration(2000);
-        animationB.setDuration(2000);
+        animationA.setDuration(1000);
+        animationB.setDuration(1000);
         //设置动画结束后效果保留
         animationA.setFillAfter(true);
         animationB.setFillAfter(true);
