@@ -46,9 +46,9 @@ public class MainActivity extends AppCompatActivity {
         int width = vi.getLayoutParams().width;
         ViewWrapper wrapper = new ViewWrapper(vi);
 
-        ObjectAnimator reduce = ObjectAnimator.ofInt(wrapper, "width", width, (int)(length*1.2));
-        ObjectAnimator increase = ObjectAnimator.ofInt(wrapper, "height", height, (int)(length*1.2));
-        ObjectAnimator move = ObjectAnimator.ofFloat(wrapper, "translationY", 0f, (float)(snail_y-vi_y-length*0.1));
+        ObjectAnimator reduce = ObjectAnimator.ofInt(wrapper, "width", width, length);
+        ObjectAnimator increase = ObjectAnimator.ofInt(wrapper, "height", height, length);
+        ObjectAnimator move = ObjectAnimator.ofFloat(wrapper, "translationY", 0f, snail_y-vi_y);
         AnimatorSet animSet = new AnimatorSet();
         animSet.play(increase).with(reduce).with(move);
         animSet.setDuration(1000);
@@ -67,18 +67,17 @@ public class MainActivity extends AppCompatActivity {
     private void rotateSnail() {
         RotateAnimation animationA = new RotateAnimation(0, 1770,
                 RotateAnimation.RELATIVE_TO_SELF, 0.5f, RotateAnimation.RELATIVE_TO_SELF, 0.5f);
-        ScaleAnimation animationB = new ScaleAnimation(0.0f, 1.0f, 0.0f, 1.0f,
+        ScaleAnimation animationB = new ScaleAnimation(0.0f, 0.85f, 0.0f, 0.85f,
                 ScaleAnimation.RELATIVE_TO_SELF, 0.5f, ScaleAnimation.RELATIVE_TO_SELF, 0.5f);
         //设置动画持续时间
         animationA.setDuration(1000);
         animationB.setDuration(1000);
-        //设置动画结束后效果保留
-        animationA.setFillAfter(true);
-        animationB.setFillAfter(true);
 
         AnimationSet as = new AnimationSet(true);
         as.addAnimation(animationA);
         as.addAnimation(animationB);
+        //设置动画结束后效果保留
+        as.setFillAfter(true);
 
         //找到对象，开启动画
         ImageView snail = (ImageView) findViewById(R.id.ic_snail);
